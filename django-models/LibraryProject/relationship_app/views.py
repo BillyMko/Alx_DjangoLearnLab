@@ -9,6 +9,7 @@ from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
 
+from django.contrib.auth.decorators import permission_required
 
 def is_admin(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
@@ -69,3 +70,33 @@ class LibraryDetailView(DetailView):
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        author_id = request.POST.get('author_id')
+        if title and author_id:
+            from .models import Author
+            author = get_object_or_404(Author, id=author_id)
+            Book.objects.create(title=title, author=author)
+            return redirect('list_books')
+    return render(request, 'relationship_app/add_book.html'
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        title = request.POST.get('title')
+        if title:
+            book.title = title
+            book.save()
+            return redirect('list_books')
+    return render(request, 'relationship_app/edit_book.html', {'book': book})
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        book.delete()
+        return redirect('list_books')
+    return render(request, 'relationship_app/delete_book.html', {'book': book})
