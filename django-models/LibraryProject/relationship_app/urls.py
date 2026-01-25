@@ -4,7 +4,10 @@ from .views import list_books
 from .views import LibraryDetailView
 from .views import register
 from .views import admin_view, librarian_view, member_view
-from .views import add_book, edit_book, delete_book
+from .views import add_book
+from .views import edit_book
+from .views import delete_book
+
 
 urlpatterns = [
     path('books/', list_books, name='list_books'),
