@@ -1,0 +1,5 @@
+<form method="post">
+  {% csrf_token %}
+  Title: <input type="text" name="title" value="{{ book.title }}"><br>
+  <button type="submit">Update Book</button>
+</form>
