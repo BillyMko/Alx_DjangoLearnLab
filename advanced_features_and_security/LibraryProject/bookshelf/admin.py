@@ -1,6 +1,7 @@
 from .models import Book
 from django.contrib.auth.admin import UserAdmin
 from .models import Book, CustomUser 
+from django.contrib.auth import get_user_model
 
 from django.contrib import admin
 

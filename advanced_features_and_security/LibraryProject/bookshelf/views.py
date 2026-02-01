@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import user_passes_test, permission_required
 from django.views.generic.detail import DetailView
 from django.contrib.auth import get_user_model
 from .models import Book, Library, Author, UserProfile
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
@@ -96,3 +102,4 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'bookshelf/register.html', {'form': form})
+
