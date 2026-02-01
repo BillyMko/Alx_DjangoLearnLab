@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .forms import ExampleForm
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
@@ -163,7 +163,7 @@ def form_example(request):
             form.save()
             return redirect('book_list')
     else:
-        form = BookForm()
+        form = ExampleForm()
 
     return render(request, 'bookshelf/form_example.html', {'form': form})
 
