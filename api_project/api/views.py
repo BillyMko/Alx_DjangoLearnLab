@@ -4,7 +4,7 @@ from .serializers import BookSerializer
 from rest_framework import generics, viewsets, permissions
 from rest_framework.permissions import IsAdminUser
 
-class BookList(generics.ListCreateAPIView):
+class BookList(generics.ListAPIView):
     # Handles CRUD operations for Book model.
 
     # Authentication:
