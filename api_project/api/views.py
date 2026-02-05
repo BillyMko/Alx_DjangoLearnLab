@@ -1,16 +1,10 @@
 from django.shortcuts import render
-from rest_framework import generics
-from .models import Book
-from .serializers import BookSerializer
-from rest_framework import viewsets
 from .models import Book
 from .serializers import BookSerializer
 from rest_framework import generics, viewsets, permissions
-from .models import Book
-from .serializers import BookSerializer
 from rest_framework.permissions import IsAdminUser
 
-class BookViewSet(viewsets.ModelViewSet):
+class BookList(generics.ListCreateAPIView):
     # Handles CRUD operations for Book model.
 
     # Authentication:
