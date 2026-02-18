@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+from django.db import models
+
+# Create your models here.
 class Author(models.Model):
     """
     The one who writes a book
