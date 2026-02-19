@@ -6,6 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.views.generic.detail import DetailView
 
 from .models import Book, Library, UserProfile, Author
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 def is_admin(user):

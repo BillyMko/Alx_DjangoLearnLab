@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lw%tt4z@lmjy0lnif3r)o@@-=wb3s&s5c%+g)k!ise33ms#zx8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'bookshelf',
-	'relationship_app'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'bookshelf.middleware.ContentSecurityPolicyMiddleware',
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
@@ -146,3 +146,23 @@ SESSION_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
+
+#
+SECURE_SSL_REDIRECT = True  # Forces all non-HTTPS requests to redirect to HTTPS
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow site to be included in browser preload lists
+
+# Secure cookies over HTTPS only
+SESSION_COOKIE_SECURE = True  # Session cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True     # CSRF cookies are only sent over HTTPS
+
+# Additional HTTP security headers
+X_FRAME_OPTIONS = 'DENY'              # Prevent clickjacking by denying framing
+SECURE_CONTENT_TYPE_NOSNIFF = True    # Prevent MIME type sniffing
+SECURE_BROWSER_XSS_FILTER = True      # Enable browser's XSS filter
+
+# Optional: Secure Referrer Policy (helps with sensitive info leaks)
+SECURE_REFERRER_POLICY = 'same-origin'

@@ -5,7 +5,7 @@ from django.urls import path, include
 from .views import BookList, BookViewSet
 
 router = DefaultRouter()
-router.register(r'books_all', BookList, basename='book_all')
+router.register(r'books_all', BookViewSet, basename='book_all')
 
 
 urlpatterns = [

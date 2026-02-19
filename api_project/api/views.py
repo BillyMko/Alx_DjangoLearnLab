@@ -4,6 +4,18 @@ from .serializers import BookSerializer
 from rest_framework import generics, viewsets, permissions
 from rest_framework.permissions import IsAdminUser
 
+class BookViewSet(viewsets.ModelViewSet):
+    # Handles CRUD operations for Book model.
+
+    # Authentication:
+    #     - TokenAuthentication required.
+    # Permissions:
+    #     - Authenticated users can list, create, update.
+    #     - Only admins can delete.
+
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
 class BookList(generics.ListAPIView):
     # Handles CRUD operations for Book model.
 
